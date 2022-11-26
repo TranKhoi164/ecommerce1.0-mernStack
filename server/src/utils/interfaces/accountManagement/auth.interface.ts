@@ -1,4 +1,5 @@
 import {Request, Response} from 'express' 
+import JwtFlow from '../../../resources/accountManagement/controllers/jwt.controller'
 
 interface AuthInterface { 
   userRegister(req: Request, res: Response): void

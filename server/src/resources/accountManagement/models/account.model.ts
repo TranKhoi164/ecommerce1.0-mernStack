@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const ObjectId = new mongoose.Types.ObjectId
+const { ObjectId } = mongoose.Schema.Types
 
 const accountModel = new mongoose.Schema({
   username: {
@@ -17,7 +17,7 @@ const accountModel = new mongoose.Schema({
   },
   address: {
     type: ObjectId,
-    ref: 'address',
+    ref: 'Address',
   },
   fullName: {
     type: String,
@@ -28,7 +28,7 @@ const accountModel = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: ' default: "https://res.cloudinary.com/dfkkrqh2s/image/upload/v1644766813/ecommerce/avatar/Screenshot_2022-02-04_181853_u6m6cf.png"'
+    default: 'https://res.cloudinary.com/dfkkrqh2s/image/upload/v1668354385/ecommerce/avatar/Screenshot_2022-02-04_181853_u6m6cf_w3hnjo.png'
   },
   dateOfBirth: {
     type: Date

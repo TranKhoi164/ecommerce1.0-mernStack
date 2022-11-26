@@ -7,17 +7,14 @@ import jwt  from "jsonwebtoken";
 import bcrypt from 'bcrypt'
 import Accounts from "../models/account.model";
 
-class AuthController implements AuthInterface {
-  private jwtFlow: JwtFlow
+const jwtFlow = new JwtFlow()
 
-  constructor() {
-    this.jwtFlow = new JwtFlow()
-  }
+class AuthController  {
 
-  userRegister(req: Request, res: Response): void {
+  public userRegister(req: Request, res: Response): void {
     try {
       const { email, password } = req.body
-      const activeToken = this.jwtFlow.createActiveToken({email, password})
+      const activeToken = jwtFlow.createActiveToken({email, password})
       //client url to active account
       const clientActiveUrl = `${process.env.CLIENT_URL}/active/${activeToken}`
       sendEmail(email, clientActiveUrl, 'Nhấn vào link bên dưới để kích hoạt tài khoản')
@@ -28,7 +25,7 @@ class AuthController implements AuthInterface {
     }
   }
 
-  async activeAccountWithEmail(req: Request, res: Response): Promise<void> {
+  public async activeAccountWithEmail(req: Request, res: Response): Promise<void> {
     try {
       const {password} = req.body
       const passwordHash = await bcrypt.hash(password, 8)
@@ -37,27 +34,31 @@ class AuthController implements AuthInterface {
         password: passwordHash
       }
       const newAccount = new Accounts(newAccountObj)
-      await newAccount.save()
 
-      this.jwtFlow.createRefreshToken({id: newAccount._id}, res)
-      const access_token = this.jwtFlow.createAccessToken({id: newAccount._id})
-      
-      const resAccountData = {
-        ...newAccount,
-        access_token: access_token
-      }
-      res.json({account_data: resAccountData})
+      jwtFlow.createRefreshToken({id: newAccount._id}, res)
+      const access_token = jwtFlow.createAccessToken({id: newAccount._id})
+
+      newAccount.save(function(err: any, userInfor: any) {
+        if (err) {
+          handleException(500, err, res)
+        }
+        const resAccountData = {
+          userInfor,
+          access_token: access_token
+        }
+        res.json(resAccountData)
+      })
     } catch (e: any) {
       handleException(500, e.message, res)
     }
   }
 
-  userLogin(req: Request, res: Response): Response {
-    return res.json({msg: 'Hi'})
+  public userLogin(req: Request, res: Response): void {
+     res.json({msg: 'Hi'})
   }
   
-  userLogout(req: Request, res: Response): void {
-    res.json({msg: 'Hi'})
+  public userLogout(req: Request, res: Response): void {
+     res.json({msg: 'Hi'})
   }
 }
 

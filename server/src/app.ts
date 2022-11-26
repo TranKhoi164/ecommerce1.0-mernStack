@@ -23,7 +23,7 @@ class App {
     this.express.use(fileUpload({useTempFiles: true}))
   }
 
-  private initializeRouter() {
+  private initializeRouter(): void {
     this.express.use('/account', accountRoutes)
     this.express.use('/address', addressRoutes)
   }

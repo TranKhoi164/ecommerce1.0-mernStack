@@ -4,11 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const ObjectId = new mongoose_1.default.Types.ObjectId;
+const { ObjectId } = mongoose_1.default.Schema.Types;
 const accountModel = new mongoose_1.default.Schema({
     username: {
         type: String,
-        required: true,
         trim: true
     },
     email: {
@@ -19,11 +18,10 @@ const accountModel = new mongoose_1.default.Schema({
     },
     password: {
         type: String,
-        required: true
     },
     address: {
         type: ObjectId,
-        ref: 'address',
+        ref: 'Address',
     },
     fullName: {
         type: String,
@@ -34,6 +32,7 @@ const accountModel = new mongoose_1.default.Schema({
     },
     avatar: {
         type: String,
+        default: 'https://res.cloudinary.com/dfkkrqh2s/image/upload/v1668354385/ecommerce/avatar/Screenshot_2022-02-04_181853_u6m6cf_w3hnjo.png'
     },
     dateOfBirth: {
         type: Date

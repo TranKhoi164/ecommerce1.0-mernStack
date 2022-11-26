@@ -1,6 +1,7 @@
 import { json } from "body-parser";
 import { Request, Response } from "express";
 import addressInterface from "../../utils/interfaces/address.interface";
+import Addresses from "./address.model";
 
 class addressController implements addressInterface {
   createNewAddress(req: Request, res: Response): Response {

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const addressModel = new mongoose.Schema({
   address: {
     type: String,
@@ -25,3 +24,6 @@ const addressModel = new mongoose.Schema({
 }, {
   timestamps: true
 })
+
+const Addresses = mongoose.model('Address', addressModel)
+export default Addresses

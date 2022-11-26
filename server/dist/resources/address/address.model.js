@@ -28,3 +28,5 @@ const addressModel = new mongoose_1.default.Schema({
 }, {
     timestamps: true
 });
+const Addresses = mongoose_1.default.model('Address', addressModel);
+exports.default = Addresses;

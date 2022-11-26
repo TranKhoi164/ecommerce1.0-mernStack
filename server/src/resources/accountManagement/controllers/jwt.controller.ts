@@ -4,14 +4,14 @@ import jwt from 'jsonwebtoken'
 import handleException from "../../../utils/handleExceptions";
 
 class JwtFlow implements JwtInterface {
-  createAccessToken(payload: any): string {
-    return jwt.sign(payload, String(process.env.JWT_ACCESS_TOKEN), {expiresIn: '15m'})
+  public createAccessToken(payload: any): string {
+    return jwt.sign(payload, String(process.env.JWT_ACCESS_TOKEN), {expiresIn: '5m'})
   }
-  createActiveToken(payload: any): string {
+  public createActiveToken(payload: any): string {
     return jwt.sign(payload, String(process.env.JWT_ACTIVE_TOKEN), {expiresIn: '5m'})
   }
-  createRefreshToken(payload: any, res: Response): void {
-    const refresh_token = jwt.sign(payload, String(process.env.JWT_REFRESH_TOKEN), {expiresIn: '7d'})
+  public createRefreshToken(payload: any, res: Response): void {
+    const refresh_token = jwt.sign(payload, String(process.env.JWT_REFRESH_TOKEN), {expiresIn: '7m'})
 
     res.cookie('refreshtoken', refresh_token, {
       httpOnly: true,
@@ -20,7 +20,7 @@ class JwtFlow implements JwtInterface {
       maxAge: 7*24*60*60*1000 //1 wneej
     })
   }
-  refreshAccessToken(req: Request, res: Response): void {
+  public refreshAccessToken(req: Request, res: Response): void {
     try {
       jwt.verify(req.body.refresh_token, String(process.env.JWT_REFRESH_TOKEN), async (err: any, accountData: any) => {
         if (err) handleException(400, err, res)

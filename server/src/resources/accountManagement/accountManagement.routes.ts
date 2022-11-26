@@ -1,9 +1,9 @@
 import { Router } from "express";
 import AuthController from "./controllers/auth.controller";
 import AccountController from "./controllers/account.controllers";
-import AccountMiddleware from "../../middlewares/accountManagement/auth.middleware";
-import JwtFlow from "../../utils/jwt";
-import JwtMiddleware from "../../middlewares/accountManagement/jwt.middleware";
+import AccountMiddleware from "./middleware/auth.middleware";
+import JwtFlow from "./controllers/jwt.controller";
+import JwtMiddleware from "./middleware/jwt.middleware";
 
 const authCtrl = new AuthController()
 const accountCtrl = new AccountController()
@@ -13,10 +13,11 @@ const jwt = new JwtFlow()
 
 const accountRoutes = Router()
 
+//  /account/...
 //auth routes
 accountRoutes.post('/register', accountMiddleware.registerMiddleware, authCtrl.userRegister)
 accountRoutes.post('/login', authCtrl.userLogin)
-accountRoutes.post('/active_account', authCtrl.activeAccountWithEmail)
+accountRoutes.get('/active_account', accountMiddleware.activeAccountMiddleware, authCtrl.activeAccountWithEmail)
 accountRoutes.post('/logout', authCtrl.userLogout)
 //account manipulation routes 
 accountRoutes.get('/information', accountCtrl.getAccountInformation)

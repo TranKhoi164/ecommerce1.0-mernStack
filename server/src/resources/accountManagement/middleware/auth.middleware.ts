@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import handleException from "../../utils/handleExceptions";
-import Accounts from "../../resources/accountManagement/models/account.model";
+import handleException from "../../../utils/handleExceptions";
+import Accounts from "../models/account.model";
 import jwt from 'jsonwebtoken'
 
 async function checkIfAccountExistByEmail(email: string, res: Response) {
@@ -11,7 +11,7 @@ async function checkIfAccountExistByEmail(email: string, res: Response) {
 }
 
 class AccountMiddleware {
-  registerMiddleware(req: Request, res: Response, next: NextFunction) {
+  public registerMiddleware(req: Request, res: Response, next: NextFunction) {
     try {
       const { email } = req.body
       checkIfAccountExistByEmail(email, res)
@@ -20,13 +20,18 @@ class AccountMiddleware {
       handleException(500, e.message, res)
     }
   }
-  activeAccountMiddleware(req: Request, res: Response, next: NextFunction) {
+
+  public activeAccountMiddleware(req: Request, res: Response, next: NextFunction) {
     try {
-      const {active_token} = req.body 
-      jwt.verify(active_token, String(process.env.JWT_ACTIVE_TOKEN), async (err: any, accountData: any) => {
+      const active_token = req.headers.authorization 
+      if (!active_token) {
+        handleException(400, 'Token has been expired, register again', res)
+      }
+      jwt.verify(String(active_token), String(process.env.JWT_ACTIVE_TOKEN), async (err: any, accountData: any) => {
         if (err) handleException(400, err, res)
         checkIfAccountExistByEmail(accountData.email, res)
         req.body = accountData
+        console.log(accountData);
         next()
       })
     } catch (e: any) {
