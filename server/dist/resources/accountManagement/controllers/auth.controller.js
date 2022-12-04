@@ -26,7 +26,7 @@ class AuthController {
             //client url to active account
             const clientActiveUrl = `${process.env.CLIENT_URL}/active/${activeToken}`;
             (0, sendEmail_1.default)(email, clientActiveUrl, 'Nhấn vào link bên dưới để kích hoạt tài khoản');
-            res.json({ msg: 'Kiểm tra email của bạn để kích hoạt tài khoản' });
+            res.json({ message: 'Kiểm tra email của bạn để kích hoạt tài khoản' });
         }
         catch (e) {
             (0, handleExceptions_1.default)(500, e.message, res);
@@ -39,18 +39,8 @@ class AuthController {
                 const passwordHash = yield bcrypt_1.default.hash(password, 8);
                 const newAccountObj = Object.assign(Object.assign({}, req.body), { password: passwordHash });
                 const newAccount = new account_model_1.default(newAccountObj);
-                jwtFlow.createRefreshToken({ id: newAccount._id }, res);
-                const access_token = jwtFlow.createAccessToken({ id: newAccount._id });
-                newAccount.save(function (err, userInfor) {
-                    if (err) {
-                        (0, handleExceptions_1.default)(500, err, res);
-                    }
-                    const resAccountData = {
-                        userInfor,
-                        access_token: access_token
-                    };
-                    res.json(resAccountData);
-                });
+                newAccount.save();
+                res.json({ message: 'Kích hoạt tài khoản thành công, giờ bạn có thể đăng nhập' });
             }
             catch (e) {
                 (0, handleExceptions_1.default)(500, e.message, res);
@@ -58,7 +48,28 @@ class AuthController {
         });
     }
     userLogin(req, res) {
-        res.json({ msg: 'Hi' });
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { email, password } = req.body;
+                account_model_1.default.findOne({ email }, (err, user) => __awaiter(this, void 0, void 0, function* () {
+                    if (!user) {
+                        (0, handleExceptions_1.default)(400, "Tài khoản chưa được đăng ký", res);
+                        return;
+                    }
+                    const passwordMatch = yield bcrypt_1.default.compare(password, String(user.password));
+                    if (!passwordMatch) {
+                        (0, handleExceptions_1.default)(400, "Mật khẩu không chính xác", res);
+                        return;
+                    }
+                    const access_token = jwtFlow.createAccessToken({ _id: user._id });
+                    jwtFlow.createRefreshToken({ _id: user._id }, res);
+                    res.json({ account: Object.assign(Object.assign({}, user._doc), { access_token }) });
+                }));
+            }
+            catch (e) {
+                (0, handleExceptions_1.default)(500, e.message, res);
+            }
+        });
     }
     userLogout(req, res) {
         res.json({ msg: 'Hi' });

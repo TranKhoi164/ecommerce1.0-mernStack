@@ -1,5 +1,5 @@
 import React from 'react'
-import authStyle from '../../styles/auth.style'
+import authStyle from '../../../styles/auth.style'
 import LoginBox from './LoginBox'
 import RegisterBox from './RegisterBox'
 

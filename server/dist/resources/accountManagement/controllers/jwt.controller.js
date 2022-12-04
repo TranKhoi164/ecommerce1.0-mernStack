@@ -15,33 +15,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const handleExceptions_1 = __importDefault(require("../../../utils/handleExceptions"));
 class JwtFlow {
+    constructor() {
+        this.refreshAccessToken = (req, res) => {
+            try {
+                let refresh_token = req.body.refresh_token;
+                jsonwebtoken_1.default.verify(refresh_token, String(process.env.JWT_REFRESH_TOKEN), (e, accountData) => __awaiter(this, void 0, void 0, function* () {
+                    if (e) {
+                        (0, handleExceptions_1.default)(400, e.message, res);
+                        return;
+                    }
+                    const access_token = this.createAccessToken({ _id: accountData._id });
+                    res.json({ access_token: access_token });
+                }));
+            }
+            catch (e) {
+                (0, handleExceptions_1.default)(500, e.message, res);
+            }
+        };
+    }
     createAccessToken(payload) {
-        return jsonwebtoken_1.default.sign(payload, String(process.env.JWT_ACCESS_TOKEN), { expiresIn: '5m' });
+        return jsonwebtoken_1.default.sign(payload, String(process.env.JWT_ACCESS_TOKEN), { expiresIn: '15m' });
     }
     createActiveToken(payload) {
         return jsonwebtoken_1.default.sign(payload, String(process.env.JWT_ACTIVE_TOKEN), { expiresIn: '5m' });
     }
     createRefreshToken(payload, res) {
-        const refresh_token = jsonwebtoken_1.default.sign(payload, String(process.env.JWT_REFRESH_TOKEN), { expiresIn: '7m' });
+        const refresh_token = jsonwebtoken_1.default.sign(payload, String(process.env.JWT_REFRESH_TOKEN), { expiresIn: '7d' });
         res.cookie('refreshtoken', refresh_token, {
             httpOnly: true,
             path: '/account/refresh_token',
             sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000 //1 wneej
+            maxAge: 7 * 24 * 59 * 60 * 1000
+            //7*24*60*60*1000 //1 wee
         });
-    }
-    refreshAccessToken(req, res) {
-        try {
-            jsonwebtoken_1.default.verify(req.body.refresh_token, String(process.env.JWT_REFRESH_TOKEN), (err, accountData) => __awaiter(this, void 0, void 0, function* () {
-                if (err)
-                    (0, handleExceptions_1.default)(400, err, res);
-                const access_token = this.createAccessToken({ id: accountData._id });
-                res.json({ access_token: access_token });
-            }));
-        }
-        catch (e) {
-            (0, handleExceptions_1.default)(500, e.message, res);
-        }
+        return refresh_token;
     }
 }
 exports.default = JwtFlow;

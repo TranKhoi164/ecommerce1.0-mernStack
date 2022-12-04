@@ -10,6 +10,10 @@ export const validatePassword = (password) => {
   )
 }
 
-export const retypePassword = (password, re_password) => {
+export const validateRetypePassword = (password, re_password) => {
   return password === re_password
+}
+
+export const validateUsername = (username) => {
+  return String(username).indexOf(' ') === -1 && String(username).length < 20
 }

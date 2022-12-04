@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+const { ObjectId } = mongoose.Schema.Types;
 
 const addressModel = new mongoose.Schema({
+  account: {
+    type: ObjectId,
+    ref: 'Account',
+  },
   address: {
     type: String,
     trim: true,

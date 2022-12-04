@@ -6,9 +6,13 @@ import HeadsetMicOutlinedIcon from '@material-ui/icons/HeadsetMicOutlined';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { selectAccount } from '../../features/account/accountSlice';
+import { useSelector } from 'react-redux';
+
 
 
 function Header() {
+  const accountData = useSelector(selectAccount)
   const headerClasses = headerStyle()
 
   return (
@@ -30,10 +34,10 @@ function Header() {
         
         <div className={headerClasses.user_service}>
           <ul className={headerClasses.list_row + ' ' + headerClasses.user_service_list}>
-            <Link to='/user/auth'>
+            <Link to={Object.keys(accountData).length > 0 ? '/account/profile' :'/auth'}>
               <li><PersonOutlineIcon className={headerClasses.service_btn} /></li>
             </Link>
-            <Link to='/user/notification'>
+            <Link to='/account/notification'>
               <li>
                 <NotificationsNoneOutlinedIcon className={headerClasses.service_btn} /> 
                 <span className={headerClasses.element_number}>1</span>

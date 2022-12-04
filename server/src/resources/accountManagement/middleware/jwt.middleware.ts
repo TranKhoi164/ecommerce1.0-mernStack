@@ -3,18 +3,14 @@ import handleException from "../../../utils/handleExceptions";
 import jwt from 'jsonwebtoken'
 import JwtFlow from "../controllers/jwt.controller";
 
+const jwtFlow = new JwtFlow()
 class JwtMiddleware {
-  private jwtFlow: JwtFlow
-  constructor() {
-    this.jwtFlow = new JwtFlow()
-  }
 
   refreshAccessTokenMiddleware(req: Request, res: Response, next: NextFunction) {
     try {
       let refresh_token = req.cookies.refreshtoken
       if (!refresh_token) {
-        this.jwtFlow.createRefreshToken({id: req.body.id}, res)
-        refresh_token = req.cookies.refreshtoken
+        refresh_token = jwtFlow.createRefreshToken({_id: req.body._id}, res)
       } 
       req.body.refresh_token = refresh_token
       next()

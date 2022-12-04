@@ -19,7 +19,7 @@ class AuthController  {
       const clientActiveUrl = `${process.env.CLIENT_URL}/active/${activeToken}`
       sendEmail(email, clientActiveUrl, 'Nhấn vào link bên dưới để kích hoạt tài khoản')
     
-      res.json({msg: 'Kiểm tra email của bạn để kích hoạt tài khoản'})
+      res.json({message: 'Kiểm tra email của bạn để kích hoạt tài khoản'})
     } catch (e: any) {
       handleException(500, e.message, res)
     }
@@ -35,26 +35,34 @@ class AuthController  {
       }
       const newAccount = new Accounts(newAccountObj)
 
-      jwtFlow.createRefreshToken({id: newAccount._id}, res)
-      const access_token = jwtFlow.createAccessToken({id: newAccount._id})
-
-      newAccount.save(function(err: any, userInfor: any) {
-        if (err) {
-          handleException(500, err, res)
-        }
-        const resAccountData = {
-          userInfor,
-          access_token: access_token
-        }
-        res.json(resAccountData)
-      })
+      newAccount.save()
+      res.json({message: 'Kích hoạt tài khoản thành công, giờ bạn có thể đăng nhập'})
     } catch (e: any) {
       handleException(500, e.message, res)
     }
   }
 
-  public userLogin(req: Request, res: Response): void {
-     res.json({msg: 'Hi'})
+  public async userLogin(req: Request, res: Response): Promise<void> {
+    try {
+      const {email, password} = req.body
+      Accounts.findOne({email}, async (err: any, user: any) => {
+        if (!user) {
+          handleException(400, "Tài khoản chưa được đăng ký", res)
+          return
+        }
+        const passwordMatch = await bcrypt.compare(password, String(user.password))
+        if (!passwordMatch) {
+          handleException(400, "Mật khẩu không chính xác", res)
+          return
+        }
+        const access_token = jwtFlow.createAccessToken({_id: user._id})
+        jwtFlow.createRefreshToken({_id: user._id}, res)
+
+        res.json({account: {...user._doc, access_token}})
+      })
+    } catch(e: any) {
+      handleException(500, e.message, res)
+    }
   }
   
   public userLogout(req: Request, res: Response): void {

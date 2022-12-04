@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import accountRoutes from "./resources/accountManagement/accountManagement.routes";
 import addressRoutes from "./resources/address/address.routes";
 import fileUpload from "express-fileupload";
+import cors from 'cors'
+import cookies from 'cookie-parser'
 
 class App {
   public express: Application
@@ -21,6 +23,8 @@ class App {
     this.express.use(express.json())
     this.express.use(express.urlencoded({extended: false}))
     this.express.use(fileUpload({useTempFiles: true}))
+    this.express.use(cors({origin: process.env.CLIENT_URL}))
+    this.express.use(cookies())
   }
 
   private initializeRouter(): void {
