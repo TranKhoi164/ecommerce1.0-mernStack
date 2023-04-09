@@ -6,6 +6,17 @@ import addressRoutes from "./resources/address/address.routes";
 import fileUpload from "express-fileupload";
 import cors from 'cors'
 import cookies from 'cookie-parser'
+import uploadRoutes from "./resources/uploadMedia/upload.routes";
+import pageRoutes from "./resources/page/page.routes";
+import subPageRoutes from "./resources/subPage/subPage.routes";
+import categoryRoutes from "./resources/category/category.routes";
+import subCategoryRoutes from "./resources/subCategory/subCategory.routes";
+import attributeRoutes from "./resources/attribute/attribute.routes";
+import productRoutes from "./resources/product/product.routes";
+import inventoryRoutes from "./resources/inventory/inventory.routes";
+import orderRoutes from "./resources/order/order.routes";
+import orderManagementRoutes from "./resources/orderManagement/orderManagement.routes";
+import ratingRoutes from "./resources/rating/rating.routes";
 
 class App {
   public express: Application
@@ -30,6 +41,17 @@ class App {
   private initializeRouter(): void {
     this.express.use('/account', accountRoutes)
     this.express.use('/address', addressRoutes)
+    this.express.use('/upload', uploadRoutes)
+    this.express.use('/page', pageRoutes)
+    this.express.use('/page', subPageRoutes)
+    this.express.use('/category', categoryRoutes)
+    this.express.use('/category', subCategoryRoutes)
+    this.express.use('/attribute', attributeRoutes)
+    this.express.use('/product', productRoutes)
+    this.express.use('/inventory', inventoryRoutes)
+    this.express.use('/order', orderRoutes)
+    this.express.use('/orderManagement', orderManagementRoutes)
+    this.express.use('/rating', ratingRoutes)
   }
 
   private initializeDatabaseConnection(): void {

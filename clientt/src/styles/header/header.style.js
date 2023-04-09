@@ -91,6 +91,9 @@ const headerStyle = makeStyles((theme) => ({
       cursor: 'pointer',
       '&:hover': {
         borderBottom: '2px solid black',
+      },
+      '& a': {
+        color: theme.palette.tertiary.main
       }
     }
   },

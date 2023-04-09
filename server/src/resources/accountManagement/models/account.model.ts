@@ -33,10 +33,14 @@ const accountModel = new mongoose.Schema({
   role: {
     type: Number,
     default: 0
-  }
-}, {
-  timestamps: true
+  },
+  addresses: [
+    {
+      type: ObjectId,
+      ref: 'address'
+    }
+  ]
 })
 
-const Accounts = mongoose.model("Account", accountModel)
+const Accounts = mongoose.model("account", accountModel)
 export default Accounts

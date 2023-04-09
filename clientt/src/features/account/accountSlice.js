@@ -9,14 +9,16 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     updateAccount: (state, action) => {
-      state.account = action.payload
+      for (const property in action.payload) {
+        state.account[property] = action.payload[property]
+      }
     },
-    deleteAccount: (state, action) => {
+    logoutAccount: (state, action) => {
       state.account = {}
     }
   }
 });
 
-export const {updateAccount, deleteAccount} = accountSlice.actions
+export const {updateAccount, logoutAccount} = accountSlice.actions
 export const selectAccount = state => state.accountData.account
 export default accountSlice.reducer

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const handleExceptions_1 = __importDefault(require("../../../utils/handleExceptions"));
 const jwt_controller_1 = __importDefault(require("./jwt.controller"));
 const sendEmail_1 = __importDefault(require("../../../utils/sendEmail"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const account_model_1 = __importDefault(require("../models/account.model"));
 const jwtFlow = new jwt_controller_1.default();
@@ -25,8 +26,14 @@ class AuthController {
             const activeToken = jwtFlow.createActiveToken({ email, password });
             //client url to active account
             const clientActiveUrl = `${process.env.CLIENT_URL}/active/${activeToken}`;
-            (0, sendEmail_1.default)(email, clientActiveUrl, 'Nhấn vào link bên dưới để kích hoạt tài khoản');
-            res.json({ message: 'Kiểm tra email của bạn để kích hoạt tài khoản' });
+            (0, sendEmail_1.default)(email, clientActiveUrl, 'Nhấn vào link bên dưới để kích hoạt tài khoản')
+                .then(() => {
+                res.json({ message: 'Kiểm tra email để kích hoạt tài khoản' });
+            })
+                .catch((e) => {
+                (0, handleExceptions_1.default)(500, e.message, res);
+                return;
+            });
         }
         catch (e) {
             (0, handleExceptions_1.default)(500, e.message, res);
@@ -71,8 +78,52 @@ class AuthController {
             }
         });
     }
+    sendResetPasswordEmail(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { email } = req.body;
+                const user = yield account_model_1.default.findOne({ email });
+                if (!user) {
+                    res.status(400).json({ msg: "Người dùng chưa đăng nhập" });
+                    return;
+                }
+                //payload: user email
+                const active_token = jwtFlow.createAccessToken({ email: user === null || user === void 0 ? void 0 : user.email });
+                const resetPassClientUrl = `${process.env.CLIENT_URL}/reset_password/${active_token}`;
+                (0, sendEmail_1.default)(email, resetPassClientUrl, "Nhấn vào link bên dưới để tạo mật khẩu mới");
+                res.json({ message: "Kiểm tra email để tạo mật khẩu mới" });
+            }
+            catch (e) {
+                (0, handleExceptions_1.default)(500, e.message, res);
+            }
+        });
+    }
+    resetPasswordWithAccessToken(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { active_token, password } = req.body;
+                console.log('jwtactivetoken: ', process.env.JWT_ACCESS_TOKEN);
+                password = yield bcrypt_1.default.hash(password, 8);
+                jsonwebtoken_1.default.verify(active_token, String(process.env.JWT_ACCESS_TOKEN), (err, userData) => __awaiter(this, void 0, void 0, function* () {
+                    if (err)
+                        return (0, handleExceptions_1.default)(400, err.message + ' xin vui lòng thử lại', res);
+                    yield account_model_1.default.findOneAndUpdate({ email: userData.email }, { password: password });
+                    return res.json({ message: "Mật khậu đã được tạo, giờ bạn có thể đăng nhập" });
+                }));
+            }
+            catch (e) {
+                (0, handleExceptions_1.default)(500, e.message, res);
+            }
+        });
+    }
     userLogout(req, res) {
-        res.json({ msg: 'Hi' });
+        try {
+            res.clearCookie('refreshtoken', { path: '/account/refresh_token' });
+            res.json({ message: 'Đăng xuất thành công' });
+        }
+        catch (e) {
+            (0, handleExceptions_1.default)(500, e.message, res);
+        }
     }
 }
 exports.default = AuthController;

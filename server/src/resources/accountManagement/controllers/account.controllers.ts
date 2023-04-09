@@ -1,19 +1,20 @@
 import { Request ,Response } from "express";
 import handleException from "../../../utils/handleExceptions";
-import AccountManipulateInterface from "../../../utils/interfaces/accountManagement/account.interface";
+import AccountManipulateInterface from "../../../utils/interfaces/accountManagement/controller/account.ctrl.interface";
 import Accounts from "../models/account.model";
 import bcrypt from 'bcrypt'
 
 class AccountController implements AccountManipulateInterface {
   public async getAccountInformation(req: Request, res: Response): Promise<void> {
     try { 
-      await Accounts.findOne({_id: req.body._id}, async (e: any, account: any) => {
-        if (e) {
+      await Accounts.findOne({_id: req.body._id}).populate('addresses').select('-password').clone()
+      .exec((e: any, account) => {
+          if (e) {
           handleException(400, e.message, res)
           return
         }
-        res.json({account})
-      }).select('-password').clone().catch((e) => handleException(400, e.message, res))
+        res.json({account})}
+      )
     } catch (e: any) {
       handleException(500, e.message, res)
     }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import AddIcon from '@material-ui/icons/Add';
 import CreateAddressDialog from '../../../utils/dialog/address/CreateAddressDialog';
 import { AddressJwtApi } from '../../../../api/addressApi';
-import AddressBox from '../../../utils/address/AddressBox';
+import AddressBox from '../../../utils/box/AddressBox';
 
 function AddressUpdate({accountData, classes}) {
   const [openDialog, setOpenDialog] = useState(false)
@@ -25,8 +25,8 @@ function AddressUpdate({accountData, classes}) {
   
 
   return (
-    <div className={classes.profile_container}>
-      <div className='header_box' style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+    <div className={classes.sub_container}>
+      <div className='header_box header_box_add'>
         <div className='header'>Địa chỉ của tôi</div>
         <Button variant="contained" color='secondary' onClick={() => setOpenDialog(true)}><AddIcon /> Thêm địa chỉ mới</Button>
       </div>

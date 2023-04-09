@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { loginApi } from '../../../api/accountApi'
 import { updateAccount } from '../../../features/account/accountSlice'
 import UserDebounce from '../../utils/UserDebounce'
-import { validatePassword, validateEmail } from '../../utils/validate/validateAccount'
+import { validatePassword, validateEmail } from '../../utils/stringFunc/validateAccount'
 import {  ErrorSnackbar } from '../../utils/snackbar/Snackbar'
 import { useNavigate } from 'react-router-dom'
 

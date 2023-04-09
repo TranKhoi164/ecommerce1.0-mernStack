@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import handleException from "../../../utils/handleExceptions";
-import { validatePassword, validateUsername } from "../../../utils/validate/validateAccount";
+import { validatePassword, validateUsername } from "../../../utils/stringFunc/validateAccount";
 import Accounts from "../models/account.model";
 import bcrypt from 'bcrypt'
+import AccountMiddlewareInterface from "../../../utils/interfaces/accountManagement/middleware/account.mdw.interface";
 
-class AccountMiddleware {
-  public updateBasicMiddleware(req: Request, res: Response, next: NextFunction) {
+class AccountMiddleware implements AccountMiddlewareInterface {
+  public updateBasicMiddleware(req: Request, res: Response, next: NextFunction): void {
     try { 
       if (!validateUsername(req.body.username)) {
         handleException(400, 'Tên đăng nhập không hợp lệ', res)
@@ -16,7 +17,7 @@ class AccountMiddleware {
       handleException(500, e.message, res)
     }
   }
-  public async updatePasswordMiddleware(req: Request, res: Response, next: NextFunction) {
+  public async updatePasswordMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try { 
       if (!validatePassword(req.body.newPassword)) {
         handleException(400, 'Mật khẩu không hợp lệ', res)

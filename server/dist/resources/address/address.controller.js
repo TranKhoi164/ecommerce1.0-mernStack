@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const handleExceptions_1 = __importDefault(require("../../utils/handleExceptions"));
 const address_model_1 = __importDefault(require("./address.model"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const account_model_1 = __importDefault(require("../accountManagement/models/account.model"));
 const { ObjectId } = mongoose_1.default.Types;
 class AddressController {
     createNewAddress(req, res) {
@@ -23,6 +24,7 @@ class AddressController {
                 const newAddress = req.body.address;
                 const newAddresssSave = new address_model_1.default(Object.assign({ account: new ObjectId(req.body._id) }, newAddress));
                 yield newAddresssSave.save();
+                yield account_model_1.default.findByIdAndUpdate(req.body._id, { $push: { addresses: newAddresssSave === null || newAddresssSave === void 0 ? void 0 : newAddresssSave._id } });
                 res.json({ message: 'Thêm mới địa chỉ thành công' });
             }
             catch (e) {
@@ -33,7 +35,7 @@ class AddressController {
     getUserAddressList(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const addressList = yield address_model_1.default.find();
+                const addressList = yield address_model_1.default.find({ account: req.body._id });
                 res.json({ address_list: addressList });
             }
             catch (e) {

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const handleExceptions_1 = __importDefault(require("../../../utils/handleExceptions"));
 const account_model_1 = __importDefault(require("../models/account.model"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const validateAccount_1 = require("../../../utils/validate/validateAccount");
+const validateAccount_1 = require("../../../utils/stringFunc/validateAccount");
 function checkIfAccountExistByEmail(email) {
     return __awaiter(this, void 0, void 0, function* () {
         const checkAccount = yield account_model_1.default.findOne({ email: email });
@@ -84,7 +84,7 @@ class AuthMiddleware {
         try {
             const access_token = req.headers.authorization;
             if (!access_token) {
-                (0, handleExceptions_1.default)(400, 'Chưa được cấp quyền', res);
+                (0, handleExceptions_1.default)(400, 'Chưa được cấp quyền để thực hiện hành động này', res);
                 return;
             }
             jsonwebtoken_1.default.verify(access_token, String(process.env.JWT_ACCESS_TOKEN), (e, userData) => __awaiter(this, void 0, void 0, function* () {
@@ -99,6 +99,22 @@ class AuthMiddleware {
         catch (e) {
             (0, handleExceptions_1.default)(500, e.message, res);
         }
+    }
+    authAdminMiddleware(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const accountId = req.body._id;
+                const checkUser = yield account_model_1.default.findOne({ _id: accountId });
+                if ((checkUser === null || checkUser === void 0 ? void 0 : checkUser.role) === 0) {
+                    (0, handleExceptions_1.default)(400, 'Chưa được cấp quyền để thực hiện hành động này', res);
+                    return;
+                }
+                next();
+            }
+            catch (e) {
+                (0, handleExceptions_1.default)(500, e.message, res);
+            }
+        });
     }
 }
 exports.default = AuthMiddleware;

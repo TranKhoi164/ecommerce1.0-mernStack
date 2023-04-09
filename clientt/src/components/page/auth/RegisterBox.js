@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { registerApi } from '../../../api/accountApi'
 import { SuccessSnackbar, ErrorSnackbar } from '../../utils/snackbar/Snackbar'
-import { validateRetypePassword, validateEmail, validatePassword } from '../../utils/validate/validateAccount'
+import { validateRetypePassword, validateEmail, validatePassword } from '../../utils/stringFunc/validateAccount'
 import useDebounce from '../../utils/UserDebounce'
 
 function RegisterBox({authClasses}) {

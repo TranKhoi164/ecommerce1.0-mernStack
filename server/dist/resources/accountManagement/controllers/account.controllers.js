@@ -19,13 +19,14 @@ class AccountController {
     getAccountInformation(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield account_model_1.default.findOne({ _id: req.body._id }, (e, account) => __awaiter(this, void 0, void 0, function* () {
+                yield account_model_1.default.findOne({ _id: req.body._id }).populate('addresses').select('-password').clone()
+                    .exec((e, account) => {
                     if (e) {
                         (0, handleExceptions_1.default)(400, e.message, res);
                         return;
                     }
                     res.json({ account });
-                })).select('-password').clone().catch((e) => (0, handleExceptions_1.default)(400, e.message, res));
+                });
             }
             catch (e) {
                 (0, handleExceptions_1.default)(500, e.message, res);

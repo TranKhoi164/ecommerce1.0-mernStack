@@ -83,7 +83,7 @@ function CreateAddressDialog({ openDialog, setOpenDialog, classes, getAddressLis
       >
         <DialogTitle id="form-dialog-title">Địa chỉ mới</DialogTitle>
         <DialogContent>
-          <div className={classes.select_location_box}>
+          <div className={classes.form_dialog_box}>
             <select name="province" onChange={changeProvince} >
               <option value="" disabled selected>Tỉnh...</option>
               {
@@ -103,7 +103,7 @@ function CreateAddressDialog({ openDialog, setOpenDialog, classes, getAddressLis
             </select>
 
             <select name="ward" onChange={changeWard}>
-            <option value="" disabled selected>Xã...</option>
+              <option value="" disabled selected>Xã...</option>
               {
                 wards.map(ward => {
                   return <option key={ward.code} value={wards.name}>{ward.name}</option>

@@ -26,9 +26,7 @@ const addressModel = new mongoose.Schema({
     trim: true,
     required: true,
   },
-}, {
-  timestamps: true
 })
 
-const Addresses = mongoose.model('Address', addressModel)
+const Addresses = mongoose.model('address', addressModel)
 export default Addresses

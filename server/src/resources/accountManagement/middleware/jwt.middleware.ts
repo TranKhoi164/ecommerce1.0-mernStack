@@ -2,11 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import handleException from "../../../utils/handleExceptions";
 import jwt from 'jsonwebtoken'
 import JwtFlow from "../controllers/jwt.controller";
+import JwtMiddlewareInterface from "../../../utils/interfaces/accountManagement/middleware/jwt.mdw.interface";
 
 const jwtFlow = new JwtFlow()
-class JwtMiddleware {
-
-  refreshAccessTokenMiddleware(req: Request, res: Response, next: NextFunction) {
+class JwtMiddleware implements JwtMiddlewareInterface {
+  refreshAccessTokenMiddleware(req: Request, res: Response, next: NextFunction): void {
     try {
       let refresh_token = req.cookies.refreshtoken
       if (!refresh_token) {

@@ -3,10 +3,11 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Button } from '@material-ui/core';
-import { validateUsername } from '../../../utils/validate/validateAccount';
+import { validateUsername } from '../../../utils/stringFunc/validateAccount';
 import { AccountJwtApi } from '../../../../api/accountApi';
 import { SuccessSnackbar } from '../../../utils/snackbar/Snackbar';
 import UserDebounce from '../../../utils/UserDebounce';
+import AvatarUpdate from './AvatarUpdate';
 
 function BasicInforUpdate({accountData, classes}) {
   const [accountUpdate, setAccountUpdate] = useState({
@@ -50,7 +51,7 @@ function BasicInforUpdate({accountData, classes}) {
   }
 
   return (
-    <div className={classes.profile_container}>
+    <div className={classes.sub_container}>
       <div className='header_box'>
         <div className='header'>Hồ sơ của tôi</div>
         Quản lý thông tin hồ sơ để bảo mật tài khoản
@@ -99,10 +100,7 @@ function BasicInforUpdate({accountData, classes}) {
           </form>
         </div>
 
-        <div className='update_avatar'>
-          <img src={accountUpdate.avatar} alt="avatar" />
-          <button>Chọn ảnh</button>
-        </div>
+        <AvatarUpdate accountData={accountData} classes={classes} />
       </div>
 
       <SuccessSnackbar message={resMessage} openSnack={openSnack} setOpenSnack={setOpenSnack} />

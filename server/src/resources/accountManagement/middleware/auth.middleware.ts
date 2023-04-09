@@ -2,7 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import handleException from "../../../utils/handleExceptions";
 import Accounts from "../models/account.model";
 import jwt from 'jsonwebtoken'
-import { validateEmail, validatePassword } from "../../../utils/validate/validateAccount";
+import { validateEmail, validatePassword } from "../../../utils/stringFunc/validateAccount";
+import AuthMiddlewareInterface from "../../../utils/interfaces/accountManagement/middleware/auth.mdw.intercface";
 
 async function checkIfAccountExistByEmail(email: string) {
   const checkAccount = await Accounts.findOne({email: email})
@@ -11,8 +12,8 @@ async function checkIfAccountExistByEmail(email: string) {
   } else return false
 }
 
-class AuthMiddleware {
-  public async registerMiddleware(req: Request, res: Response, next: NextFunction) {
+class AuthMiddleware implements AuthMiddlewareInterface {
+  public async registerMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { email, password } = req.body
       if (await checkIfAccountExistByEmail(email)) {
@@ -29,7 +30,7 @@ class AuthMiddleware {
     }
   }
 
-  public async activeAccountMiddleware(req: Request, res: Response, next: NextFunction) {
+  public async activeAccountMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const active_token = req.headers.authorization 
       if (!active_token) {
@@ -53,7 +54,7 @@ class AuthMiddleware {
     }
   }
 
-  public loginMiddleware(req: Request, res: Response, next: NextFunction) {
+  public loginMiddleware(req: Request, res: Response, next: NextFunction): void {
     const {email, password} = req.body
 
     if (validateEmail(email) == null || validatePassword(password) == null) {
@@ -63,11 +64,11 @@ class AuthMiddleware {
     next()
   }
 
-  public authUserMiddleware(req: Request, res: Response, next: NextFunction) {
+  public authUserMiddleware(req: Request, res: Response, next: NextFunction): void {
     try {
       const access_token = req.headers.authorization
       if (!access_token) {
-        handleException(400, 'Chưa được cấp quyền', res)
+        handleException(400, 'Chưa được cấp quyền để thực hiện hành động này', res)
         return
       }
       jwt.verify(access_token, String(process.env.JWT_ACCESS_TOKEN), async (e: any, userData: any) => {
@@ -78,6 +79,20 @@ class AuthMiddleware {
         req.body._id = userData._id
         next()
       })
+    } catch (e: any) {
+      handleException(500, e.message, res)
+    }
+  }
+
+  public async authAdminMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const accountId = req.body._id
+      const checkUser = await Accounts.findOne({_id: accountId})
+      if (checkUser?.role === 0) {
+        handleException(400, 'Chưa được cấp quyền để thực hiện hành động này', res)
+        return
+      }
+      next()
     } catch (e: any) {
       handleException(500, e.message, res)
     }

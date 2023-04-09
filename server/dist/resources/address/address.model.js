@@ -30,8 +30,6 @@ const addressModel = new mongoose_1.default.Schema({
         trim: true,
         required: true,
     },
-}, {
-    timestamps: true
 });
-const Addresses = mongoose_1.default.model('Address', addressModel);
+const Addresses = mongoose_1.default.model('address', addressModel);
 exports.default = Addresses;

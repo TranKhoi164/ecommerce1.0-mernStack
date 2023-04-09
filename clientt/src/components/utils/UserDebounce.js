@@ -1,7 +1,6 @@
-import React from 'react'
 import { useState } from 'react'
 
-function UserDebounce() {
+function UseDebounce() {
   const [timeOutStore, setTimeOutStore] = useState("")
 
   function debounce(func, wait) {
@@ -16,4 +15,4 @@ function UserDebounce() {
   return debounce
 }
 
-export default UserDebounce
+export default UseDebounce

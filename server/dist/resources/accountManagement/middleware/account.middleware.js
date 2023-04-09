@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const handleExceptions_1 = __importDefault(require("../../../utils/handleExceptions"));
-const validateAccount_1 = require("../../../utils/validate/validateAccount");
+const validateAccount_1 = require("../../../utils/stringFunc/validateAccount");
 const account_model_1 = __importDefault(require("../models/account.model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 class AccountMiddleware {

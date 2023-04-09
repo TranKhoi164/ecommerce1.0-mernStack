@@ -26,7 +26,7 @@ function HeaderOnscroll(props) {
       <CssBaseline />
       <HideOnScroll {...props}>
         <AppBar>
-          <Header />
+          <Header pages={props.pages} />
         </AppBar>
       </HideOnScroll>
     </>

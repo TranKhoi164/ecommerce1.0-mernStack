@@ -19,10 +19,12 @@ const jwt = new jwt_controller_1.default();
 const accountRoutes = (0, express_1.Router)();
 //  /account/...
 //auth routes
+accountRoutes.post('/reset_password_email', authCtrl.sendResetPasswordEmail);
+accountRoutes.post('/reset_password_token', authCtrl.resetPasswordWithAccessToken);
 accountRoutes.post('/register', authMiddleware.registerMiddleware, authCtrl.userRegister);
 accountRoutes.post('/login', authMiddleware.loginMiddleware, authCtrl.userLogin);
 accountRoutes.get('/active_account', authMiddleware.activeAccountMiddleware, authCtrl.activeAccountWithEmail);
-accountRoutes.post('/logout', authCtrl.userLogout);
+accountRoutes.get('/logout', authMiddleware.authUserMiddleware, authCtrl.userLogout);
 //account manipulation routes 
 accountRoutes.get('/information', authMiddleware.authUserMiddleware, accountCtrl.getAccountInformation);
 accountRoutes.patch('/update_basic', authMiddleware.authUserMiddleware, accountMiddleware.updateBasicMiddleware, accountCtrl.updateAccountBasicInfor);

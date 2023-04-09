@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import JwtInterface from "../../../utils/interfaces/accountManagement/jwt.interface";
+import JwtInterface from "../../../utils/interfaces/accountManagement/controller/jwt.ctrl.interface";
 import jwt from 'jsonwebtoken'
 import handleException from "../../../utils/handleExceptions";
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Button } from '@material-ui/core';
-import { validatePassword, validateRetypePassword } from '../../../utils/validate/validateAccount';
+import { validatePassword, validateRetypePassword } from '../../../utils/stringFunc/validateAccount';
 import { AccountJwtApi } from '../../../../api/accountApi';
 import UserDebounce from '../../../utils/UserDebounce';
 import { ErrorSnackbar, SuccessSnackbar } from '../../../utils/snackbar/Snackbar';
@@ -47,7 +47,7 @@ function PasswordUpdate({accountData, classes}) {
   }
 
   return (
-    <div className={classes.profile_container}>
+    <div className={classes.sub_container}>
       <div className='header_box'>
         <div className='header'>Đổi mật khẩu</div>
         Để bảo vệ tài khoản, vui lòng không chia sẻ mật khẩu cho người khác 

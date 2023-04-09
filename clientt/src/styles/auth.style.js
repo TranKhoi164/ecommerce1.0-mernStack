@@ -10,6 +10,13 @@ const authStyle = makeStyles((theme) => ({
     width: '70%',
     display: 'flex',
   },
+  reset_password: {
+    marginTop: '30px',
+    width: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   login_register_container: {
     display: 'flex',
     flexDirection: 'column',

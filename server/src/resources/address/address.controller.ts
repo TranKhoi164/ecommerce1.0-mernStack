@@ -1,9 +1,10 @@
 import { json } from "body-parser";
 import { Request, Response } from "express";
 import handleException from "../../utils/handleExceptions";
-import addressInterface from "../../utils/interfaces/address.interface";
+import addressInterface from "../../utils/interfaces/address/address.ctrl.interface";
 import Addresses from "./address.model";
 import mongoose from "mongoose";
+import Accounts from "../accountManagement/models/account.model";
 
 const { ObjectId } = mongoose.Types
 
@@ -13,6 +14,7 @@ class AddressController implements addressInterface {
       const newAddress = req.body.address
       const newAddresssSave = new Addresses({account: new ObjectId(req.body._id), ...newAddress})
       await newAddresssSave.save()
+      await Accounts.findByIdAndUpdate(req.body._id, {$push: {addresses: newAddresssSave?._id}})
       res.json({message: 'Thêm mới địa chỉ thành công'})
     } catch(e: any) {
       handleException(500, e.message, res)
@@ -20,7 +22,7 @@ class AddressController implements addressInterface {
   }
   public async getUserAddressList(req: Request, res: Response): Promise<void> {
     try {
-      const addressList = await Addresses.find()
+      const addressList = await Addresses.find({account: req.body._id})
       res.json({address_list: addressList})
     } catch(e: any) {
       handleException(500, e.message, res)

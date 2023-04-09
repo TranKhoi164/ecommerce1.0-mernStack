@@ -37,9 +37,13 @@ const accountModel = new mongoose_1.default.Schema({
     role: {
         type: Number,
         default: 0
-    }
-}, {
-    timestamps: true
+    },
+    addresses: [
+        {
+            type: ObjectId,
+            ref: 'address'
+        }
+    ]
 });
-const Accounts = mongoose_1.default.model("Account", accountModel);
+const Accounts = mongoose_1.default.model("account", accountModel);
 exports.default = Accounts;

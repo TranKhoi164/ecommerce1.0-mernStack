@@ -39,10 +39,35 @@ export const loginApi = (email, password) => {
       email: email,
       password: password,
     }).then(accountData => {
-      console.log(accountData)
       resolve(accountData.data)
     }).catch(e => {
       console.log(e);
+      reject(e.response.data)
+    })
+  })
+}
+
+export const sendResetPasswordEmailApi = (email) => {
+  return new Promise((resolve, reject) => {
+    axios.post(REACT_APP_SERVER_URL + '/account/reset_password_email', {
+      email: email.email,
+    }).then(data => {
+      resolve(data.data)
+    }).catch(e => {
+      reject(e.response.data)
+    })
+  })
+}
+
+//token and newPassword
+export const resetPasswordWithToken = (data) => {
+  return new Promise((resolve, reject) => {
+    axios.post(REACT_APP_SERVER_URL + '/account/reset_password_token', {
+      active_token: data.active_token,
+      password: data.password
+    }).then(data => {
+      resolve(data.data)
+    }).catch(e => {
       reject(e.response.data)
     })
   })
@@ -55,51 +80,90 @@ export const AccountJwtApi = () => {
   const dispatch = useDispatch()
   const axiosJwt = AxiosJWT()
 
-  const getAccountInfor = (access_token) => {
-    return new Promise((resolve, reject) => {
-      axiosJwt.get(REACT_APP_SERVER_URL + '/account/information', 
-        { headers: { Authorization: accountData.access_token} }
-      ).then(getInforMessage => {
-        dispatch(updateAccount({...getInforMessage.data.account, access_token: accountData.access_token}))
-        resolve(getInforMessage.data)
-      }).catch(e => {
-        reject(e.response.data)
+  const getAccountInfor = () => {
+    if (Object.keys(accountData).length > 0) {
+      return new Promise((resolve, reject) => {
+        axiosJwt.get(REACT_APP_SERVER_URL + '/account/information', 
+          { headers: { Authorization: accountData.access_token} }
+        ).then(getInforMessage => {
+          console.log(getInforMessage)
+          dispatch(updateAccount({...getInforMessage.data.account, access_token: accountData.access_token}))
+          resolve(getInforMessage.data)
+        }).catch(e => {
+          console.log(e);
+          reject(e.response.data)
+        })
       })
-    })
+    }
   }
 
   const updateBasicAccountApi = (updateAccount) => {
-    return new Promise((resolve, reject) => {
-      axiosJwt.patch(REACT_APP_SERVER_URL + '/account/update_basic', 
-        { ...updateAccount },
-        { headers: { Authorization: accountData.access_token} }
-      ).then(updateMessage => {
-        resolve(updateMessage.data)
-      }).catch(e => {
-        console.log(e)
-        reject(e)
+    if (Object.keys(accountData).length > 0) {
+      return new Promise((resolve, reject) => {
+        axiosJwt.patch(REACT_APP_SERVER_URL + '/account/update_basic', 
+          { ...updateAccount },
+          { headers: { Authorization: accountData.access_token} }
+        ).then(updateMessage => {
+          resolve(updateMessage.data)
+        }).catch(e => {
+          reject(e.response.data)
+        })
       })
-    })
+    }
   }
 
   const updatePasswordApi = (updatePassword) => {
-    return new Promise((resolve, reject) => {
-      axiosJwt.patch(REACT_APP_SERVER_URL + '/account/update_password', 
-        { ...updatePassword },
-        { headers: { Authorization: accountData.access_token} }
-      ).then(updateMessage => {
-        console.log(updateMessage);
-        resolve(updateMessage.data)
-      }).catch(e => {
-        console.log(e.response);
-        reject(e.response.data)
+    if (Object.keys(accountData).length > 0){
+      return new Promise((resolve, reject) => {
+        axiosJwt.patch(REACT_APP_SERVER_URL + '/account/update_password', 
+          { ...updatePassword },
+          { headers: { Authorization: accountData.access_token} }
+        ).then(updateMessage => {
+          resolve(updateMessage.data)
+        }).catch(e => {
+          reject(e.response.data)
+        })
       })
-    })
+    }
+  }
+
+  const updateAvatarApi = (formData) => {
+    if (Object.keys(accountData).length > 0) {
+      return new Promise((resolve, reject) => {
+        axiosJwt.post(REACT_APP_SERVER_URL + '/upload/upload_avatar', 
+          formData,
+          { headers: { "Content-Type": "multipart/form-data", Authorization: accountData.access_token} }
+        ).then(updateAvatarMessage => {
+          console.log(updateAvatarMessage);
+          resolve(updateAvatarMessage.data)
+        }).catch(e => {
+          console.log(e);
+          reject(e.response.data)
+        })
+      })
+    }
+  }
+
+  const logoutApi = () => {
+    if (Object.keys(accountData).length > 0) {
+      return new Promise((resolve, reject) => {
+        axiosJwt.get(REACT_APP_SERVER_URL + '/account/logout', 
+          { headers: { Authorization: accountData.access_token} }
+        ).then(logoutMsg => {
+          console.log(logoutMsg);
+        }).catch(e => {
+          console.log(e);
+          reject(e.response.data)
+        })
+      })
+    }
   }
 
   return ({ 
     getAccountInfor: getAccountInfor,
     updateBasicAccountApi: updateBasicAccountApi,
-    updatePasswordApi: updatePasswordApi
+    updatePasswordApi: updatePasswordApi,
+    updateAvatarApi: updateAvatarApi,
+    logoutApi: logoutApi,
   })
 }
