@@ -6,10 +6,14 @@ import { validateEmail, validatePassword } from "../../../utils/stringFunc/valid
 import AuthMiddlewareInterface from "../../../utils/interfaces/accountManagement/middleware/auth.mdw.intercface";
 
 async function checkIfAccountExistByEmail(email: string) {
-  const checkAccount = await Accounts.findOne({email: email})
-  if (checkAccount) {
-    return true
-  } else return false
+  let test = true
+  await Accounts.findOne({email: email}, async (err: any, user: any) => {
+    if (err) throw new Error(err)
+    if (!user) {
+      test = false
+    } 
+  }).clone().catch(function(err: any){throw new Error(err)})
+  return test
 }
 
 class AuthMiddleware implements AuthMiddlewareInterface {

@@ -7,6 +7,7 @@ import Inventories from "../inventory/inventory.model";
 import ProductFeature from "./product.feature";
 import Ratings from "../rating/rating.model";
 import { getDataFromCache, saveDataToCache, deleteDataFromCache, getMultipleEntries } from "../../service/redis/redis.service";
+import { headerCache } from "../../utils/headerCache";
 
 
 interface QueryType {
@@ -42,6 +43,8 @@ class ProductCtrl implements ProductCtrlInterface {
       const cacheProduct = await getDataFromCache('product:'+product_sku)
 
       if (cacheProduct) {
+        const maxAge = 60*60
+        headerCache(maxAge, req, res)
         res.json({product: JSON.parse(cacheProduct)})
         return
       } else {
@@ -49,6 +52,9 @@ class ProductCtrl implements ProductCtrlInterface {
         .populate('inventories')
         await saveDataToCache(`product:${product?.sku}`, JSON.stringify(product), 60*60)
         
+        const maxAge = 60*60
+        headerCache(maxAge, req, res)
+
         res.json({product: product} )
         return
       }

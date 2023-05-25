@@ -1,0 +1,46 @@
+FROM node:14-alpine 
+
+WORKDIR /trankhoi/src/app
+
+ENV PORT=5000
+ENV NODE_ENV=development
+# ENV MONGO_URI=mongodb://mongodb:27023/ecommerce-docker
+# ecommerce5
+ENV JWT_ACTIVE_TOKEN=)@n!ZE3AD6g$q&m7%KUXZ3tn(Z*xsSgFjPtH2s(zdXmmCM5ynV%#2tevEmwf9np&
+ENV JWT_ACCESS_TOKEN=wF5vAmPkhqpDFtmhZtbkW6aX^^zWCN!NVfHVPfwUUvq3UT(@QZt#G7EkpHh(m#jQ
+ENV JWT_REFRESH_TOKEN=&vw&#N&7V3&m#I775+gQvMLES!pu)bWwzr&%F2TPMMzxd4jV3aT(^HZXRZpGdIK%
+
+ENV CLOUD_NAME=dfkkrqh2s
+ENV CLOUD_API_KEY=939432192549264
+ENV CLOUD_API_SECRET=FS5rQHoEhPDvauVpedOx-B2Wytk
+
+ENV CLIENT_URL=http://localhost:3000
+# ENV REDIS_URL=redis://redis:6379
+# redis[s]://[[username][:password]@][host][:port][/db-number]:
+
+ENV SENDER_EMAIL_ADDRESS=khoitay11566@gmail.com
+ENV SENDER_PASSWORD=zvyuhgkasqwrnzex
+
+COPY package*.json .
+COPY . .  
+
+RUN npm ci
+EXPOSE 5000
+
+RUN npm run build
+
+
+# FROM node:14-alpine as production
+
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
+
+# WORKDIR /trankhoi/src/app
+
+# COPY package*.json .
+
+# RUN npm ci --only=production
+
+# COPY --from=development /trankhoi/src/app/dist ./dist
+
+# CMD [ "node", "dist/index.js" ]

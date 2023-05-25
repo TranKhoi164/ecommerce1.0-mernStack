@@ -30,6 +30,8 @@ import ResetPasswordToken from './page/auth/ResetPasswordToken'
 function Router({pages, products, setProducts}) {
   const accountData = useSelector(selectAccount)
 
+  console.log(pages);
+
   return (
     <div>
       <Routes>

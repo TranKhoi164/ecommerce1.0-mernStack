@@ -3,9 +3,25 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const redisClient = createClient({url: process.env.REDIS_URL})
+const {REDIS_URL, REDIS_HOST, REDIS_PORT} = process.env
 
-redisClient.on('error', (err) => console.log('Redis client error: ', err))
+let redisClient: any
+
+if (!REDIS_URL) {
+  redisClient = createClient({
+    legacyMode: true,
+    socket: {
+      port: Number(REDIS_PORT),
+      host: String(REDIS_HOST),
+    }
+  })  
+} else {
+  redisClient = createClient({
+    url: REDIS_URL
+  })  
+}
+
+redisClient.on('error', (err: any) => console.log('Redis client error: ', err))
 
 redisClient.connect()
 redisClient.on('connect', () => console.log('Client connect on ', process.env.REDIS_URL))

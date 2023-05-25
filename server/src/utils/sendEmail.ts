@@ -4,19 +4,19 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const {
-  CLIENT_CONSOLE_ID,
-  CLIENT_CONSOLE_SECRET,
-  CLIENT_CONSOLE_REFRESH,
   SENDER_EMAIL_ADDRESS,
   SENDER_PASSWORD,
-  REDIRECT_URI
 } = process.env
 
 const sendEmail = (to: string, active_url: string, msg: string) => {
   return new Promise((resolve, reject) => {
     try {
+      console.log('sender: ', SENDER_EMAIL_ADDRESS);
+      console.log('pass: ', SENDER_PASSWORD);
       let transporter = nodemailer.createTransport({
         service: 'gmail',
+        host: 'smtp.gmail.com',
+        secure: true,
         auth: {
           user: String(SENDER_EMAIL_ADDRESS),
           pass: String(SENDER_PASSWORD),

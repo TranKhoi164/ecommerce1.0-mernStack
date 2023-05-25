@@ -1,11 +1,12 @@
 import express, { Express, Application } from "express";
-import helmet from "helmet";
+
 import mongoose from "mongoose";
-import accountRoutes from "./resources/accountManagement/accountManagement.routes";
-import addressRoutes from "./resources/address/address.routes";
 import fileUpload from "express-fileupload";
 import cors from 'cors'
 import cookies from 'cookie-parser'
+
+import accountRoutes from "./resources/accountManagement/accountManagement.routes";
+import addressRoutes from "./resources/address/address.routes";
 import uploadRoutes from "./resources/uploadMedia/upload.routes";
 import pageRoutes from "./resources/page/page.routes";
 import subPageRoutes from "./resources/subPage/subPage.routes";
@@ -52,12 +53,18 @@ class App {
     this.express.use('/order', orderRoutes)
     this.express.use('/orderManagement', orderManagementRoutes)
     this.express.use('/rating', ratingRoutes)
+    this.express.get('/', (req, res) => {
+      res.json({message: 'hello nodejs'})
+    } )
   }
 
-  private initializeDatabaseConnection(): void {
+  private async initializeDatabaseConnection() {
     const mongoUrl = process.env.MONGO_URI
-    mongoose.connect(String(mongoUrl), (err: any) => {
-      if (err) throw new Error(err)
+    await mongoose.connect(String(mongoUrl), (err: any) => {
+      if (err) {
+        console.log(err);
+        throw new Error(err)
+      }
       else console.log("Connect to mongodb");
     })
   }

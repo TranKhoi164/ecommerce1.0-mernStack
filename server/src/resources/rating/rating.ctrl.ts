@@ -6,6 +6,7 @@ import Orders from "../order/order.model";
 import Products from "../product/product.model";
 import Ratings from "./rating.model";
 import cron from 'node-cron'
+import { headerCache } from "../../utils/headerCache";
 
 class RatingCtrl implements RatingInterface {
   public async createRating(req: Request, res: Response): Promise<void> {
@@ -36,8 +37,10 @@ class RatingCtrl implements RatingInterface {
       let cacheRatings: any = await getDataFromCache('ratings:'+product)
       cacheRatings = JSON.parse(cacheRatings)
 
+      const maxAge = 60*15
+
       if (cacheRatings?.length > 0) {
-        console.log(1);
+        headerCache(maxAge, req, res)
         res.json({ratings: cacheRatings})
         return
       } else {
@@ -61,6 +64,8 @@ class RatingCtrl implements RatingInterface {
           setTimeout(()=>{
             schedule.stop()
           }, 1000*60*60)
+
+          headerCache(maxAge, req, res)
 
           res.json({ratings: ratings})
         }

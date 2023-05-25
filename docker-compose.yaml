@@ -1,0 +1,61 @@
+services:
+  ecommercefe:
+    restart: always
+    networks:
+      - common
+    build: 
+      context: ./clientt
+      dockerfile: dockerfile.reactUI
+    ports:
+      - "3000:3000"
+    environment:
+      -  REACT_APP_SERVER_URL=http://localhost:5000
+    depends_on:
+      - mongodb
+      - redisdb
+      - ecommercebe
+
+  ecommercebe: 
+    restart: always
+    build: 
+      context: ./server
+      dockerfile: dockerfile.node
+    environment:
+      -  REDIS_HOST=redisdb
+      -  REDIS_PORT=6379
+      -  MONGO_URI=mongodb://mongodb/ecommerce-docker
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+      - redisdb
+    command: node dist/index.js
+    networks:
+      - common
+
+  mongodb: 
+    container_name: mongodb
+    image: mongo
+    restart: always
+    ports:
+      - 27023:27017
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - common
+  
+  redisdb:
+    image: redis:alpine
+    restart: always
+    networks:
+      - common
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data/db
+networks:
+  common:
+
+volumes:
+  mongodb:
+  cache: 
