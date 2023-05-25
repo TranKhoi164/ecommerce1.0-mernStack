@@ -6,6 +6,7 @@ services:
     build: 
       context: ./clientt
       dockerfile: dockerfile.reactUI
+    image: trankhoi/ecommerce-mern:ecommercefe
     ports:
       - "3000:3000"
     environment:
@@ -20,6 +21,7 @@ services:
     build: 
       context: ./server
       dockerfile: dockerfile.node
+    image: trankhoi/ecommerce-mern:ecommercebe
     environment:
       -  REDIS_HOST=redisdb
       -  REDIS_PORT=6379
