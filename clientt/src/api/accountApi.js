@@ -13,6 +13,9 @@ export const registerApi = (email, password) => {
     }).then(register_msg => {
       resolve(register_msg.data)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -28,6 +31,9 @@ export const activeAccountApi =  (active_token) => {
       console.log(activeAccount)
       resolve(activeAccount.data)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -42,6 +48,9 @@ export const loginApi = (email, password) => {
       resolve(accountData.data)
     }).catch(e => {
       console.log(e);
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -54,6 +63,9 @@ export const sendResetPasswordEmailApi = (email) => {
     }).then(data => {
       resolve(data.data)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -68,6 +80,9 @@ export const resetPasswordWithToken = (data) => {
     }).then(data => {
       resolve(data.data)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -91,6 +106,9 @@ export const AccountJwtApi = () => {
           resolve(getInforMessage.data)
         }).catch(e => {
           console.log(e);
+          if (!e.response?.data?.message) {
+            reject(e)
+          }
           reject(e.response.data)
         })
       })
@@ -106,6 +124,9 @@ export const AccountJwtApi = () => {
         ).then(updateMessage => {
           resolve(updateMessage.data)
         }).catch(e => {
+          if (!e.response?.data?.message) {
+            reject(e)
+          }
           reject(e.response.data)
         })
       })
@@ -121,6 +142,9 @@ export const AccountJwtApi = () => {
         ).then(updateMessage => {
           resolve(updateMessage.data)
         }).catch(e => {
+          if (!e.response?.data?.message) {
+            reject(e)
+          }
           reject(e.response.data)
         })
       })
@@ -138,6 +162,9 @@ export const AccountJwtApi = () => {
           resolve(updateAvatarMessage.data)
         }).catch(e => {
           console.log(e);
+          if (!e.response?.data?.message) {
+            reject(e)
+          }
           reject(e.response.data)
         })
       })
@@ -153,6 +180,9 @@ export const AccountJwtApi = () => {
           console.log(logoutMsg);
         }).catch(e => {
           console.log(e);
+          if (!e.response?.data?.message) {
+            reject(e)
+          }
           reject(e.response.data)
         })
       })

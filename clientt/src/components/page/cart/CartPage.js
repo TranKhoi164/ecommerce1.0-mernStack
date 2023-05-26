@@ -7,6 +7,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import { Link, useNavigate } from 'react-router-dom'
 
 import CartItemBox from './CartItemBox'
+import { priceValidate } from '../../utils/stringFunc/manipulateString';
 
 function CartPage() {
   const classes = cartStyle()
@@ -38,6 +39,14 @@ function CartPage() {
     navigate('/checkout', { state: {purchaseOrders: purchaseOrders} })
   }
 
+  const totalCost = () => {
+    let res = 0;
+    purchaseOrders.forEach(el => {
+      res += el?.inventory?.price * el?.quantity
+    });
+    return res
+  }
+
   return (
     <div className={classes.cartPage_container}>
       {
@@ -61,9 +70,9 @@ function CartPage() {
           <h2>Tóm Tắt Đơn Hàng</h2>
           <div className='total_price'>
             <div>Giá tiền</div> 
-            <div className='display_price'>120.000 <sup><u>đ</u></sup></div>
+            <div className='display_price'>{priceValidate(totalCost())} <sup><u>đ</u></sup></div>
           </div>
-          <div style={{marginTop: '10px'}}>Tổng thanh toán (0 sản phẩm)</div>
+          <div style={{marginTop: '10px'}}>Tổng thanh toán ({orders?.length} sản phẩm)</div>
           <button onClick={checkoutTrigger}>Thanh Toán Ngay</button>
         </div>
       </div> :

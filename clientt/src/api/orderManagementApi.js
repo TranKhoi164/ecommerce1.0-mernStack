@@ -15,6 +15,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -27,6 +30,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -39,6 +45,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -51,6 +60,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -63,6 +75,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -76,6 +91,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -89,6 +107,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -102,6 +123,9 @@ export function OrderManagementJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -116,6 +140,9 @@ export function OrderManagementJwtApi() {
       }).then(deleteMessage => {
         resolve(deleteMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

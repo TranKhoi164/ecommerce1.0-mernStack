@@ -34,7 +34,7 @@ class InventoryCtrl implements InventoryInterface {
       const {inventory} = req.body
       const updateInventory = await Inventories.findOne({sku: inventory.sku, shippingAddress: inventory.shippingAddress})
 
-      console.log('inventory: ', inventory);
+      console.log('inventory: ', updateInventory);
       
       if (updateInventory?.quantity !== undefined && inventory?.quantity !== undefined) {
         updateInventory.quantity = updateInventory.quantity - inventory.quantity
@@ -44,6 +44,7 @@ class InventoryCtrl implements InventoryInterface {
           return handleException(400, err.message, res)
         }
       })
+      res.json({message: 'Cập nhập inventory thành công'})
     } catch (e: any) {
       handleException(500, e.message, res)
     }

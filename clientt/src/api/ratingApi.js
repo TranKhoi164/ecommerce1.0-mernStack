@@ -17,6 +17,9 @@ export function RatingJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -29,6 +32,9 @@ export function RatingJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -40,6 +46,9 @@ export function RatingJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -53,6 +62,9 @@ export function RatingJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

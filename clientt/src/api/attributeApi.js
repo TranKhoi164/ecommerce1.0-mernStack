@@ -17,6 +17,9 @@ export function AttributeJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -28,6 +31,9 @@ export function AttributeJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -42,6 +48,9 @@ export function AttributeJwtApi() {
         console.log();
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -55,6 +64,9 @@ export function AttributeJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -70,6 +82,9 @@ export function AttributeJwtApi() {
       }).then(deleteMessage => {
         resolve(deleteMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

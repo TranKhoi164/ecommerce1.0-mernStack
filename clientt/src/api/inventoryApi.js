@@ -16,6 +16,9 @@ export function InventoryJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -29,6 +32,9 @@ export function InventoryJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

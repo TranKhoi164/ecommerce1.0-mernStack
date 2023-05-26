@@ -16,6 +16,9 @@ export function SubCategoryJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -31,6 +34,9 @@ export function SubCategoryJwtApi() {
       }).then(deleteMessage => {
         resolve(deleteMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

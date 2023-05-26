@@ -12,6 +12,9 @@ export const getProvincesApi = () => {
     ).then(provinces => {
       resolve(provinces.data)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -23,6 +26,9 @@ export const getDistrictsApi = (province_code) => {
     ).then(districts => {
       resolve(districts.data.districts)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -34,6 +40,9 @@ export const getWardsApi = (district_code) => {
     ).then(wards => {
       resolve(wards.data.wards)
     }).catch(e => {
+      if (!e.response?.data?.message) {
+        reject(e)
+      }
       reject(e.response.data)
     })
   })
@@ -51,6 +60,9 @@ export const AddressJwtApi = () => {
       ).then(createAddressMessage => {
         resolve(createAddressMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -63,6 +75,9 @@ export const AddressJwtApi = () => {
       ).then(addressList => {
         resolve(addressList.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -76,6 +91,9 @@ export const AddressJwtApi = () => {
       ).then(updateMessage => {
         resolve(updateMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       }) 
     })
@@ -93,6 +111,9 @@ export const AddressJwtApi = () => {
         resolve(deleteMessage)
       }).catch(e => {
         console.log(e)
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

@@ -16,6 +16,9 @@ export function CategoryJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -28,6 +31,9 @@ export function CategoryJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -43,6 +49,9 @@ export function CategoryJwtApi() {
       }).then(deleteMessage => {
         resolve(deleteMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })

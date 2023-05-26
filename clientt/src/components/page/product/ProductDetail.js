@@ -163,31 +163,21 @@ function ProductDetail() {
     return true
   } 
 
-  const addToCart = (e) => {
+  const addToCart = async (e) => {
     if (!allFieldIsFilled() || !productInventory.quantity) {
       setAllFilled(false)
       return
     }
-    debounce(() =>
-      updateInventoryApi({sku: product?.sku + skuAttributeValidate(selectAttributes), quantity: newOrder.quantity  })
-      .then(() => {
-        createOrderApi({...newOrder, status: 'pending'})
-        .then(message => {
-          console.log('yolo');
-          setReqMessage(message.message)
-          setIsSuccessReq(true)
-          setOpenSnack(true)
-          setAllFilled(true)
-        }).catch(e => {
-          setReqMessage(e.message)
-          setIsSuccessReq(false)
-          setOpenSnack(true)
-        })
-      }).catch(e => {
-        alert(e.message + 'ngu')
-      }) 
-    , 1000)
-    .catch(e => alert(e.message))
+    try {
+      console.log('test');
+      await updateInventoryApi({sku: product?.sku + skuAttributeValidate(selectAttributes), quantity: newOrder.quantity, shippingAddress: newOrder.shippingAddress  })
+      const createOrderMess = await createOrderApi({...newOrder, status: 'pending'})
+      console.log(createOrderMess);
+      console.log('ngu');
+      alert(createOrderMess.message)
+    } catch (e) {
+      alert(e.message)
+    }
   }
 
   const buyProduct = (e) => { 

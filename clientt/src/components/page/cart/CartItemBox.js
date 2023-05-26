@@ -60,10 +60,10 @@ function CartItemBox({order, orders, setOrders}) {
           </div>
           <div>
             <input type="number" style={{marginRight: '5px'}} value={quantity} min={1} max={parseInt(order?.inventory.quantity) + parseInt(order?.quantity)} disabled /> 
-            <span style={{fontSize: '12px', fontWeight: '500'}}>còn {order?.inventory.quantity} sản phẩm</span>
+            <span style={{fontSize: '12px', fontWeight: '500'}}>còn {order?.inventory?.quantity} sản phẩm</span>
           </div>
           <div>
-            {priceValidate(order?.inventory.price*quantity)}<sup><u>đ</u></sup>
+            {priceValidate(order?.inventory?.price*quantity)}<sup><u>đ</u></sup>
           </div>
         </div>
         <div className='action'>

@@ -17,6 +17,9 @@ export function ProductJwtApi() {
       ).then(createPageMessage => {
         resolve(createPageMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -31,6 +34,9 @@ export function ProductJwtApi() {
         resolve(uploadMessage.data)
       }).catch(e => {
         console.log(e);
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -42,6 +48,9 @@ export function ProductJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
@@ -54,7 +63,10 @@ export function ProductJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
-        reject(e)
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
+        reject(e.response.data)
       })
     })
   }
@@ -68,7 +80,10 @@ export function ProductJwtApi() {
       ).then(message => {
         resolve(message.data)
       }).catch(e => {
-        reject(e)
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
+        reject(e.response.data)
       })
     })
   }
@@ -84,6 +99,9 @@ export function ProductJwtApi() {
         console.log(deleteMessage);
         resolve(deleteMessage.data)
       }).catch(e => {
+        if (!e.response?.data?.message) {
+          reject(e)
+        }
         reject(e.response.data)
       })
     })
