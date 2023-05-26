@@ -16,9 +16,9 @@ project for study purpose
 ![Screenshot 2023-05-26 081534](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ba1fc171-a18b-4423-ba67-67f4c1ba3eb2)
 ## Trạng thái sản phẩm sau khi admin xác nhận đơn hàng
 ![Screenshot 2023-05-26 081549](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/8635b7e5-b92a-4588-af37-d8547345596f)
-## Lúc này người dùng được phép để đánh giá sản phẩm
+## Lúc này người dùng được phép đánh giá sản phẩm
 ![Screenshot 2023-05-26 081728](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/f834fcf0-19cd-4407-a7d6-26c1f3be33b6)
-## Hoặc người dùng có thể cho sản phẩm vào giỏ hàng
+## Người dùng có thể cho sản phẩm vào giỏ hàng
 ![Screenshot 2023-05-26 095103](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/bd638646-ac3b-4e44-bebf-93abf4e59c9b)
 ## Trang thanh toán
 ![Screenshot 2023-05-26 095112](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ef68fe8b-1439-4653-9a7f-097d241ce052)
