@@ -24,6 +24,9 @@ project for study purpose
 ![Screenshot 2023-05-26 095112](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ef68fe8b-1439-4653-9a7f-097d241ce052)
 ## Phần rating có thể được filter dựa theo số sao, loại sản phẩm, có paginate, mỗi rating tối đa 5 ảnh
 ![Screenshot 2023-05-26 100815](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/745c10a5-e2ae-42c3-88ef-95cadcfab295)
+## Admin quản lý trang, trang con, danh mục
+![Screenshot 2023-05-26 080615](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/aedd8798-8815-46d0-8333-68076a39760a)
+
 ## Admin tạo sản phẩm
 ![Screenshot 2023-05-26 080921](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/a85a1832-f176-473b-81fd-cac122347034)
 ## Tạo loại sản phẩm
