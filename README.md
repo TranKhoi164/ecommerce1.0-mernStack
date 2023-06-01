@@ -45,6 +45,3 @@ project for study purpose
 ![Screenshot 2023-05-26 080514](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/e26a5570-6cf1-4ca1-977c-5d5892a0ba9f)
 
 
-## Database diagram
-![Screenshot 2023-05-26 103303](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/2c6432e5-d00d-4e73-b479-fef94dad89f0)
-
