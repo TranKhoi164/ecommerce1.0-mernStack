@@ -6,24 +6,39 @@ project for study purpose
 ![Screenshot 2023-05-26 075328](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/cbcee894-c4c7-40cd-8aa9-638a5f3c1ada)
 ![Screenshot 2023-05-26 075435](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/8bd1ed1b-0419-4315-a4b7-fcb2bbfb849a)
 ![Screenshot 2023-05-26 075453](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/cc13c5a5-9dec-4498-8711-738ea40f172f)
+
 ## Product detail, mỗi loại sản phẩm có số lượng, giá tiền, sku khác nhau. Phải chọn đủ thông tin trước khi thanh toán hay cho vào giỏ hàng
 ![Screenshot 2023-05-26 075542](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/942765f1-4f52-482f-825a-a2d22faa64f0)
+## Kéo xuống xem mô tả sản phẩm
+![Screenshot 2024-12-08 160619](https://github.com/user-attachments/assets/6f91a8a3-bddd-4626-a1d0-b57360bcdaa7)
+
 ## Trang thanh toán
 ![Screenshot 2023-05-26 081227](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/f425e077-aae8-42fa-9ceb-1744d96b27b9)
+
 ## Tiến trình sẽ được theo dõi trong trang "đơn mua"
 ![Screenshot 2023-05-26 081303](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/c4f6b5cc-55e3-4997-9826-fdad9b2a5508)
+## Chọn đơn để xem thông tin, trạng thái đơn
+![Screenshot 2025-02-25 132929](https://github.com/user-attachments/assets/8fbc4f05-c451-46f7-8378-3054d024f6b5)
+
 ## Admin xác nhận đơn hàng
 ![Screenshot 2023-05-26 081534](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ba1fc171-a18b-4423-ba67-67f4c1ba3eb2)
+
 ## Trạng thái sản phẩm sau khi admin xác nhận đơn hàng
 ![Screenshot 2023-05-26 081549](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/8635b7e5-b92a-4588-af37-d8547345596f)
+
 ## Lúc này người dùng được phép đánh giá sản phẩm
 ![Screenshot 2023-05-26 081728](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/f834fcf0-19cd-4407-a7d6-26c1f3be33b6)
+
 ## Người dùng có thể cho sản phẩm vào giỏ hàng
 ![Screenshot 2023-05-26 095103](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/bd638646-ac3b-4e44-bebf-93abf4e59c9b)
+
 ## Trang thanh toán
 ![Screenshot 2023-05-26 095112](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ef68fe8b-1439-4653-9a7f-097d241ce052)
+
 ## Phần rating có thể được filter dựa theo số sao, loại sản phẩm, có paginate, mỗi rating tối đa 5 ảnh
 ![Screenshot 2023-05-26 100815](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/745c10a5-e2ae-42c3-88ef-95cadcfab295)
+![Screenshot 2024-12-08 154841](https://github.com/user-attachments/assets/ab2e1aa2-9b35-424d-979d-49b7204389fc)
+
 ## Admin quản lý trang, trang con, danh mục
 ![Screenshot 2023-05-26 080615](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/aedd8798-8815-46d0-8333-68076a39760a)
 
@@ -40,6 +55,11 @@ project for study purpose
 
 ## Người dùng login, register, dùng axios interceptor để lấy accesstoken mới nếu hết hạn
 ![Screenshot 2023-05-26 080424](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/48f79208-dfda-40f5-b2c9-3989dd2fcc1b)
+## Khi register thành công sẽ có email gửi đến
+![Screenshot 2024-12-08 154706](https://github.com/user-attachments/assets/326a992e-dff6-4903-a0c3-c1e1df5f3f4d)
+## Nhấn link để kích hoạt, sau đó có thể login
+![Screenshot 2024-12-08 154739](https://github.com/user-attachments/assets/70d99187-8b9d-4c44-85c5-396cad59ce55)
+
 ## Update thông tin
 ![Screenshot 2023-05-26 080458](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/026086cb-7ae3-4d50-98fd-1d1ad2d78711)
 ![Screenshot 2023-05-26 080514](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/e26a5570-6cf1-4ca1-977c-5d5892a0ba9f)
