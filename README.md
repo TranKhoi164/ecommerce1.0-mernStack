@@ -12,7 +12,7 @@ project for study purpose
 ## Kéo xuống xem mô tả sản phẩm
 ![Screenshot 2024-12-08 160619](https://github.com/user-attachments/assets/6f91a8a3-bddd-4626-a1d0-b57360bcdaa7)
 
-## Trang thanh toán
+## Chọn "mua ngay" sẽ vào trang thanh toán
 ![Screenshot 2023-05-26 081227](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/f425e077-aae8-42fa-9ceb-1744d96b27b9)
 
 ## Tiến trình sẽ được theo dõi trong trang "đơn mua"
