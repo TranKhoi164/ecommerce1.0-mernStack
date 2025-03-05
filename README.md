@@ -18,7 +18,7 @@ project for study purpose
 ## Tiến trình sẽ được theo dõi trong trang "đơn mua"
 ![Screenshot 2023-05-26 081303](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/c4f6b5cc-55e3-4997-9826-fdad9b2a5508)
 ## Chọn đơn để xem thông tin, trạng thái đơn
-![Screenshot 2025-02-25 132929](https://github.com/user-attachments/assets/8fbc4f05-c451-46f7-8378-3054d024f6b5)
+![Screenshot 2025-03-05 115006](https://github.com/user-attachments/assets/1c0bf368-0e8f-46c1-9d41-0bc2e47a6ddf)
 
 ## Admin xác nhận đơn hàng
 ![Screenshot 2023-05-26 081534](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ba1fc171-a18b-4423-ba67-67f4c1ba3eb2)
