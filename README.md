@@ -11,6 +11,8 @@ project for study purpose
 ![Screenshot 2023-05-26 075542](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/942765f1-4f52-482f-825a-a2d22faa64f0)
 ## Kéo xuống xem mô tả sản phẩm
 ![Screenshot 2024-12-08 160619](https://github.com/user-attachments/assets/6f91a8a3-bddd-4626-a1d0-b57360bcdaa7)
+## Kéo xuống xem đánh giá. Phần đánh giá có thể được filter dựa theo số sao, loại sản phẩm, có paginate, mỗi rating tối đa 5 ảnh
+![Screenshot 2025-03-05 120429](https://github.com/user-attachments/assets/7db1d70d-a9f3-4556-9416-d06221ad7b2c)
 
 ## Chọn "mua ngay" sẽ vào trang thanh toán
 ![Screenshot 2023-05-26 081227](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/f425e077-aae8-42fa-9ceb-1744d96b27b9)
@@ -34,10 +36,6 @@ project for study purpose
 
 ## Trang thanh toán
 ![Screenshot 2023-05-26 095112](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/ef68fe8b-1439-4653-9a7f-097d241ce052)
-
-## Phần rating có thể được filter dựa theo số sao, loại sản phẩm, có paginate, mỗi rating tối đa 5 ảnh
-![Screenshot 2023-05-26 100815](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/745c10a5-e2ae-42c3-88ef-95cadcfab295)
-![Screenshot 2024-12-08 154841](https://github.com/user-attachments/assets/ab2e1aa2-9b35-424d-979d-49b7204389fc)
 
 ## Admin quản lý trang, trang con, danh mục
 ![Screenshot 2023-05-26 080615](https://github.com/TranKhoi164/ecommerce1.0-mernStack/assets/103193779/aedd8798-8815-46d0-8333-68076a39760a)
